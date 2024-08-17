@@ -84,3 +84,7 @@ input{
     button#limpiar_resultado:hover{
         background-color: #facc15;
     }
+
+    .resultado__label #contador{
+        color: #727272;
+    }

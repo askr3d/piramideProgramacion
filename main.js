@@ -4,6 +4,9 @@ const limpiar_resultado = document.querySelector('#limpiar_resultado');
 const simbolo = document.querySelector('#simbolo');
 const numero = document.querySelector('#numero');
 const resultado_objetivo = document.querySelector('#resultado_objetivo');
+const contador = document.querySelector('#contador');
+let segundos = 0;
+let intervalo;
 
 document.addEventListener('DOMContentLoaded', () => {
     formularioConfig(); //Configuracion para cuando se manden los datos
@@ -29,6 +32,8 @@ const formularioConfig = () => {
     //Cada vez que se mandan los datos del formulario se manda a llamar la funcion dibujarResultado
     formularioDiagnostico.addEventListener('submit', (e) => {
         e.preventDefault(); //Evita que se recargue la pagina
+        intervalo != null && detenerContador(); //En caso de existir el contador se reinicia
+        iniciarContador();//Se inicia el contador de segundos
         dibujarResultado(simbolo.value, numero.value);
     })
 }
@@ -49,7 +54,7 @@ const dibujarResultado = (simbolo, numero) => {
 
 const limpiarResultadoConfig = () => {
 
-    //Cuando se presiona el boton limpiar se limpian los inputs y el resultado dibujado
+    //Cuando se presiona el boton limpiar se limpian el contador, los inputs y el resultado dibujado
     limpiar_resultado.addEventListener('click', () => {
         simbolo.value = '';
         numero.value = '';
@@ -57,5 +62,20 @@ const limpiarResultadoConfig = () => {
         li.innerText = ':)';
         resultado_objetivo.innerHTML = '';
         resultado_objetivo.appendChild(li);
+        detenerContador();
     });
+}
+
+//Se inicia el contador
+const iniciarContador = () => {
+    intervalo = setInterval(() => {//Esta funcion va mostrando los segundos que van pasando
+        segundos++;
+        contador.innerText = segundos + ' seg';
+    },1000);
+}
+
+//Se detiene el contador eliminando el intervalo que se ejecuta cada segundo
+const detenerContador = () => {
+    clearInterval(intervalo);
+    segundos = 0;
 }
