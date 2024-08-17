@@ -1,4 +1,3 @@
-//Codigo: 217727672
 //Declaracion de variables DOM
 const limpiar_resultado = document.querySelector('#limpiar_resultado');
 const simbolo = document.querySelector('#simbolo');
